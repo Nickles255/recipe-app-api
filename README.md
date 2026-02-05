@@ -12,3 +12,4 @@ docker-compose run --rm app sh -c "python manage.py test"
 
 ## create django project
 docker-compose run --rm app sh -c "django-admin startproject app ."
+docker-compose up
