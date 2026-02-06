@@ -4,8 +4,8 @@ Recipe API project
 ## use flake8 package
 ### NOTE: update to docker-compose.yml should execute below
 ```shl
-docker-compose down
-docker-compose build
+docker-compose down -v
+docker-compose up --build
 ```
 docker-compose run --rm app sh -c "flake8"
 docker-compose run --rm app sh -c "python manage.py test"
@@ -25,3 +25,17 @@ docker-compose up
 
 ### Mocking
 * speed up test or prevent email to end user
+
+
+## Create Databased
+* race condition setting up database
+```shl
+docker-compose run --rm app sh -c "python manage.py startapp core" 
+```
+
+## TESTING
+
+docker-compose run --rm app sh -c "python manage.py test"
+docker-compose run --rm app sh -c "python manage.py wait_for_db"
+docker-compose run --rm app sh -c "python manage.py test & flake8"
+
