@@ -39,3 +39,17 @@ docker-compose run --rm app sh -c "python manage.py test"
 docker-compose run --rm app sh -c "python manage.py wait_for_db"
 docker-compose run --rm app sh -c "python manage.py test & flake8"
 
+## ADMIN
+
+* create custom model for new projects - to not use default user model
+    * AbstractBaseUser -- BaseUserMethod
+    * PermissionsMixin
+* do clear migration then setup user model
+
+## migrate User model 
+docker-compose run --rm app sh -c "python manage.py makemigrations"
+## migrate model into volume -- need to make sure volume isn't created already
+docker volume ls
+docker compose down
+docker volume rm recipe-app-api_dev-db-data
+docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py migrate"
