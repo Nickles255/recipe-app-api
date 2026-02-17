@@ -66,3 +66,23 @@ clin@ccsf.edu - citycollege
 * admin - create admin.py
     * for each model add admin.site.register (Recipe)
 - https://docs.djangoproject.com/en/5.2/ref/contrib/admin/#reversing-admin-urls
+
+### API Documentation
+#### Things to document
+- available end points
+- supported methods: GET, POST, PUT, PATCH, DELETE
+- Format fo payloads
+  - parm
+  - post JSON format
+- format of responses
+  - response json format
+- authentication process
+#### Automated - API documentation
+- doc strings
+- add documentation for API
+- use library drf-spectacular -
+  - add to requirements.txt
+  - docker compose build
+  - setup in settings.py -- 
+- https://drf-spectacular.readthedocs.io/en/latest/index.html
+- swagger documentation too
