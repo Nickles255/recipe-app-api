@@ -1,0 +1,7 @@
+[tool.black]
+# ... any other black settings you want (line-length, target-version, etc.)
+
+# Exclude Django migration folders (this one targets core/migrations specifically)
+exclude = '''
+/core/migrations/
+'''
