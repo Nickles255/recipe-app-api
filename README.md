@@ -1,8 +1,48 @@
 # recipe-app-api
 Recipe API project
 ## 
-- clin@ccsf.edu - citycollege - ca392b9f022f40b01c1be189ca49031b2212a92b
+- clin@ccsf.edu - citycollege - b2090df6c8eb17248384340c93417d354edde2e8
 - nickles255@gmail.com testuser123
+- user2@example.com - password - 95dd5fccd6d1e0885e8bcdd987d0671afb20d2b2
+{
+  "title": "Cream",
+  "time_minutes": 4,
+  "price": "2.99",
+  "link": "missing",
+  "tags": [
+    {
+      "name": "dessert"
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "cream"
+    }
+  ],
+  "description": "whipped cream"
+}
+
+{
+  "title": "Soup",
+  "time_minutes": 30,
+  "price": "2.99",
+  "link": "missing",
+  "tags": [
+    {
+      "name": "appetizer"
+    }
+  ],
+  "ingredients": [
+    {
+      "name": "tomatoes"
+    },
+
+    {
+      "name": "onions"
+    }
+  ],
+  "description": "warm soup for cold days"
+}
 ## use flake8 package
 ### NOTE: update to docker-compose.yml should execute below
 ```shl
@@ -147,8 +187,8 @@ docker-compose up
   - urls.py - register router
   - create recipe_api test
 - final testing and flake8 check
-  - docker-compose run --rm app sh -c "python manage.py black ./"
-  - docker-compose run --rm app sh -c "python manage.py flake8"
+  - docker-compose run --rm app sh -c "black . --exclude migrations"
+  - docker-compose run --rm app sh -c "flake8"
   - docker-compose run --rm app sh -c "python manage.py test"
 
 ## Nexted serializers
@@ -171,9 +211,36 @@ docker-compose up
   - /api/recipe/<id>/
     - PUT/PATCH - create or update recipe ingredients 
 
+## Image Model
+- image - image of recipe
+- user - user who owns image
+- end point 
+  - api/recipe/<id>/upload-images/
+    - POST - Upload image  
+  - api/recipe/images/
+    - GET - List images
+  - api/recipe/images/<id>
+    - GET - View image details
+    - PUT/PATCH - Update image
+    - DELETE - Delete image 
+### Images
+- Configuration - in settings.py
+  - STATIC_URL - /static/static/ -- static files base URL
+  - MEDIA_URL - /static/media/ -- media files base URL
+  - MEDIA_ROOT - /vol/web/media/ -- where media files are stored in file system
+  - STATIC_ROOT - /vol/web/static/ -- where static files are stored in file system
+-require using multipart/form-data - options
+  - "http://localhost:8000/static/media/uploads/recipe/f5c59a49-ccc9-4245-91d1-5472ddccc6aa.png
+### Docker Volume - storing persistent data
+- /vol/web - store
+
+## gathering static files
+- python manage.py collectstatic
+
+## Dockerfile change - rebuild
 docker-compose build --no-cache app
 
 ## Database remains - remove
 docker-compose down -v
 docker-compose up --build
-
+docker-compose run --rm app sh -c "python manage.py migrate"
